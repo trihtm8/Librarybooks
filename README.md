@@ -7,5 +7,5 @@ MSSV: B2014624
 Trường DH Cần Thơ, Khoa CNTT-TT
 
 # Học phần
-CT449-01 Phát triển ứng dung Web
+CT449-01 Phát triển ứng dụng Web
 GV hướng dẫn Thầy Nguyễn Minh Trung
