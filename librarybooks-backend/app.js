@@ -20,11 +20,17 @@ app.get("/", (req, res)=> {
     res.json({ message: "Welcom to librarybooks-backend" });
 });
 
-// app.use("/api/publishers", publicshersRouter);
-// app.use("/api/books", booksRouter);
-// app.use("/api/borrowcards", borrowcardsRouter);
-// app.use("/api/librarians", librariansRouter);
-// app.use("/app/students", studentsRouter);
+const docGiaRoutes = require('./app/routes/docGiaRoutes');
+const sachRoutes = require('./app/routes/sachRoutes');
+const nhaXuatBanRoutes = require('./app/routes/nhaXuatBanRoutes');
+const theoDoiMuonSachRoutes = require('./app/routes/theoDoiMuonSachRoutes');
+const nhanVienRoutes = require('./app/routes/nhanVienRoutes');
+
+app.use('/docgia', docGiaRoutes);
+app.use('/sach', sachRoutes);
+app.use('/nhaxuatban', nhaXuatBanRoutes);
+app.use('/theodoimuonsach', theoDoiMuonSachRoutes);
+app.use('/nhanvien', nhanVienRoutes);
 
 app.use((req, res, next) => {
     return next(new ApiError(404, "Resource not found"));
