@@ -83,7 +83,7 @@ const createFakeSach = async () => {
         for (let i = 0; i < numFakeSach; i++) {
             const fakeSach = {
                 TenSach: faker.lorem.words(),
-                DonGia: faker.datatype.number({ min: 10000, max: 500000 }),
+                DonGia: faker.datatype.number({ min: 10, max: 500 }),
                 SoQuyen: faker.datatype.number({ min: 1, max: 100 }),
                 NamXuatBan: faker.datatype.number({ min: 1990, max: 2022 }),
                 MaNXB: faker.random.arrayElement(maNXBList),
