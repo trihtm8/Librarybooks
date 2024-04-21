@@ -1,18 +1,23 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <img alt="Vue logo" class="logo" src="@/assets/logo.png" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+      <HelloWorld msg="Lybrarybooks admin page" />
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/nxb">Nhà xuất bản</RouterLink>
+        <RouterLink to="/sach">Sách</RouterLink>
+        <RouterLink to="/nhanvien">Nhân Viên</RouterLink>
+        <RouterLink to="/docgia">Độc giả</RouterLink>
+        <RouterLink to="/theodoimuonsach">Theo dõi mượn sách</RouterLink>
       </nav>
     </div>
   </header>
@@ -60,7 +65,7 @@ nav a:first-of-type {
   header {
     display: flex;
     place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+    padding-right: calc(var(--section-gap) / 4);
   }
 
   .logo {

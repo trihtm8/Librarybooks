@@ -26,11 +26,11 @@ const nhaXuatBanRoutes = require('./app/routes/nhaXuatBanRoutes');
 const theoDoiMuonSachRoutes = require('./app/routes/theoDoiMuonSachRoutes');
 const nhanVienRoutes = require('./app/routes/nhanVienRoutes');
 
-app.use('/docgia', docGiaRoutes);
-app.use('/sach', sachRoutes);
-app.use('/nhaxuatban', nhaXuatBanRoutes);
-app.use('/theodoimuonsach', theoDoiMuonSachRoutes);
-app.use('/nhanvien', nhanVienRoutes);
+app.use('/api/docgia', docGiaRoutes);
+app.use('/api/sach', sachRoutes);
+app.use('/api/nhaxuatban', nhaXuatBanRoutes);
+app.use('/api/theodoimuonsach', theoDoiMuonSachRoutes);
+app.use('/api/nhanvien', nhanVienRoutes);
 
 app.use((req, res, next) => {
     return next(new ApiError(404, "Resource not found"));

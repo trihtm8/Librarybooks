@@ -1,10 +1,13 @@
 @import './base.css';
 
 #app {
+  width: 80dvw;
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   font-weight: normal;
+  height: fit-content;
+  min-height: 100dvh;
 }
 
 a,
@@ -28,8 +31,6 @@ a,
   }
 
   #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     padding: 0 2rem;
   }
 }

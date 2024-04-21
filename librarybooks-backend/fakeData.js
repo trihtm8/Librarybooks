@@ -81,13 +81,19 @@ const createFakeSach = async () => {
         const maNXBList = await getAllMaNXB();
 
         for (let i = 0; i < numFakeSach; i++) {
+            const origins = [];
+            for (let i = 0; i < 10; i++) {
+                origins.push(faker.name.lastName());
+            }
+            origins.push("Truyền thuyết", "Dân gian", "Văn học");
+
             const fakeSach = {
                 TenSach: faker.lorem.words(),
                 DonGia: faker.datatype.number({ min: 10, max: 500 }),
-                SoQuyen: faker.datatype.number({ min: 1, max: 100 }),
+                SoQuyen: faker.datatype.number({ min: 1, max: 20 }),
                 NamXuatBan: faker.datatype.number({ min: 1990, max: 2022 }),
                 MaNXB: faker.random.arrayElement(maNXBList),
-                NguonGoc: faker.random.arrayElement([faker.name.lastName(), "Truyền thuyết", "Dân gian", "Văn học"])
+                NguonGoc: faker.random.arrayElement(origins)
             };
             fakeSachData.push(fakeSach);
         }
