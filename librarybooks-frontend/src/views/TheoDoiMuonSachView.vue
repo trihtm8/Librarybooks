@@ -42,7 +42,7 @@
             <td>{{ tdms.TenDocGia || 'Loading...' }}</td>
             <td>{{ tdms.NgayMuon }}</td>
             <td>{{ tdms.NgayTra }}</td>
-            <td>{{ tdms.DaTra }}</td>
+            <td>{{ tdms.DaTra }} <button @click="tra(tdms._id)" v-if="tdms.status=='trả trễ'"><i class="fa-solid fa-hand-holding-hand"></i></button></td>
             <td>{{ tdms.status }} <button @click="deleteTDMS(tdms._id)" v-if="tdms.DaTra"><i class="fa-solid fa-trash"></i></button></td>
           </tr>
         </tbody>
@@ -172,32 +172,34 @@
       }
     },
     methods: {
+      async tra(id){
+        await TheoDoiMuonSachService.update(id, {DaTra: true});
+        this.unFiltered();
+        await this.fetchSachList();
+      },
       async fetchSachList() {
         try {
           this.TDMSList = await TheoDoiMuonSachService.getAll();
-          this.TDMSList.forEach(function (tdms) {
-            tdms.status="";
-            const NgayMuonStatus= checkday(tdms.NgayMuon);
-            const NgayTraStatus= checkday(tdms.NgayTra);
-            if(NgayMuonStatus==="future" || NgayMuonStatus=="now"){
-              tdms.status = "chờ";
-              if (tdms.DaTra){
-                tdms.status = "hủy hẹn";
-              }
-            }
-            else if (NgayMuonStatus === "past" && !tdms.DaTra) {
-              tdms.status = "đang mượn";
-              if(NgayTraStatus === "past"){
-                tdms.status = "trả trễ";
-              }
-            } else if (NgayMuonStatus === "past" && tdms.DaTra) {
-                if (NgayTraStatus === "now" || NgayTraStatus === "future") {
-                    tdms.status = "trả sớm";
-                }else if (NgayTraStatus === "past"){
-                  tdms.status = "đã trả"
-                }
-            }
-          })
+          this.TDMSList.forEach((element) => {
+                    if(checkday(element.NgayMuon)=="future" || checkday(element.NgayMuon)=="now"){
+                        element.status = "chờ"
+                        if(element.DaTra){
+                            element.status = "hủy hẹn"
+                        }
+                    }else if(checkday(element.NgayMuon)=="past"){
+                        if(checkday(element.NgayTra) == "future" || checkday(element.NgayTra)=="now"){
+                            element.status = "đang mượn"
+                            if(element.DaTra){
+                                element.status = "trả sớm"
+                            }
+                        }else if(checkday(element.NgayTra) == "past"){
+                            element.status = "trả trễ"
+                            if(element.DaTra){
+                                element.status = "đã trả"
+                            }
+                        }
+                    }
+                })
           await Promise.all(this.TDMSList.map(async (element) => {
             const sach = await SachService.get(element.MaSach);
             element.TenSach = sach.TenSach;

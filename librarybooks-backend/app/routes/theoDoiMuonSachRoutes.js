@@ -18,6 +18,20 @@ router.get('/', async (req, res, next) => {
     }
 });
 
+router.get('/docgia/:docGiaId', async (req, res, next) => {
+    try {
+        const theoDoiList = await TheoDoiMuonSach.find({MaDocGia: req.params.docGiaId});
+        const formattedTheoDoiList = theoDoiList.map(theoDoi => ({
+            ...theoDoi.toJSON(),
+            NgayMuon: moment(theoDoi.NgayMuon).format('DD-MM-YYYY'),
+            NgayTra: moment(theoDoi.NgayTra).format('DD-MM-YYYY')
+        }));
+        res.json(formattedTheoDoiList);
+    }catch (err) {
+        next(err);
+    }
+})
+
 router.get('/:id', async (req, res, next) => {
     try {
         const theoDoi = await TheoDoiMuonSach.findById(req.params.id);
