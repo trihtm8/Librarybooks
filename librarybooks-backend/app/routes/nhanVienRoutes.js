@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { NhanVien } = require('../models/models');
+const ApiError = require('../api-error');
 
 router.get('/', async (req, res, next) => {
     try {

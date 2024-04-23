@@ -11,7 +11,7 @@ import HelloWorld from './components/HelloWorld.vue'
     <div class="wrapper">
       <HelloWorld msg="Librarybooks admin page" />
       <nav>
-        <RouterLink id="homeOnAdmin" to="/">Home</RouterLink>
+        <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/nxb">Nhà xuất bản</RouterLink>
         <RouterLink to="/sach">Sách</RouterLink>
         <RouterLink to="/nhanvien">Nhân Viên</RouterLink>

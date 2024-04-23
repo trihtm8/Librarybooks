@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { DocGia } = require('../models/models');
 const moment = require('moment');
+const ApiError = require('../api-error');
 
 router.get('/', async (req, res, next) => {
     try {
@@ -19,6 +20,20 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
     try {
         const docGia = await DocGia.findById(req.params.id);
+        if (!docGia) {
+            return next(new ApiError(404, 'DocGia not found'));
+        }
+        formattedDocGia = docGia.toJSON();
+        formattedDocGia['NgaySinh']=moment(docGia.NgaySinh).format('DD-MM-YYYY');
+        res.json(formattedDocGia);
+    } catch (err) {
+        next(err);
+    }
+});
+
+router.get("/sdt/:sdt", async (req, res, next) => {
+    try {
+        const docGia = await DocGia.findOne({DienThoai : req.params.sdt});
         if (!docGia) {
             return next(new ApiError(404, 'DocGia not found'));
         }
