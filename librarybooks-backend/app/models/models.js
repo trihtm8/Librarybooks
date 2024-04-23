@@ -27,7 +27,8 @@ const theoDoiMuonSachSchema = new mongoose.Schema({
     MaDocGia: { type: String, required: true },
     MaSach: { type: String, required: true },
     NgayMuon: Date,
-    NgayTra: Date
+    NgayTra: Date,
+    DaTra: Boolean,
 });
 
 const nhanVienSchema = new mongoose.Schema({

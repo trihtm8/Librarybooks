@@ -32,10 +32,10 @@
       };
     },
     async created() {
-      await this.fetchNXBList();
+      await this.fetchNhanVienList();
     },
     methods: {
-      async fetchNXBList() {
+      async fetchNhanVienList() {
         try {
           this.nhanVienList = await NhanVienService.getAll();
         } catch (error) {
@@ -50,6 +50,7 @@
   table {
     width: 100%;
     border-collapse: collapse;
+    text-align: center;
   }
   
   th, td {
@@ -59,5 +60,19 @@
   
   th {
     background-color: #f2f2f2;
+  }
+  
+  .actions {
+    display: inline;
+  }
+  .actions>button{
+    margin: 5px;
+    border-radius: 5px;
+  }
+  .actions>button:hover{
+    background-color: bisque;
+  }
+  table button:hover{
+    background-color: bisque;
   }
 </style>

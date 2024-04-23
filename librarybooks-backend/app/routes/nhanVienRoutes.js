@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { NhanVien } = require('../models/models');
 
-// GET - Lấy tất cả nhân viên
 router.get('/', async (req, res, next) => {
     try {
         const nhanVienList = await NhanVien.find();
@@ -12,7 +11,6 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-// GET - Lấy nhân viên bằng ID
 router.get('/:id', async (req, res, next) => {
     try {
         const nhanVien = await NhanVien.findById(req.params.id);
@@ -25,7 +23,6 @@ router.get('/:id', async (req, res, next) => {
     }
 });
 
-// POST - Tạo mới một nhân viên
 router.post('/', async (req, res, next) => {
     try {
         const newNhanVien = new NhanVien(req.body);
@@ -36,7 +33,6 @@ router.post('/', async (req, res, next) => {
     }
 });
 
-// PUT - Cập nhật thông tin nhân viên
 router.put('/:id', async (req, res, next) => {
     try {
         const updatedNhanVien = await NhanVien.findByIdAndUpdate(req.params.id, req.body, { new: true });

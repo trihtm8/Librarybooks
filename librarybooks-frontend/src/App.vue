@@ -6,13 +6,12 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.png" width="125" height="125" />
+    <img alt="logo" class="logo" src="@/assets/logo.png" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="Lybrarybooks admin page" />
-
+      <HelloWorld msg="Librarybooks admin page" />
       <nav>
-        <RouterLink to="/">Home</RouterLink>
+        <RouterLink id="homeOnAdmin" to="/">Home</RouterLink>
         <RouterLink to="/nxb">Nhà xuất bản</RouterLink>
         <RouterLink to="/sach">Sách</RouterLink>
         <RouterLink to="/nhanvien">Nhân Viên</RouterLink>

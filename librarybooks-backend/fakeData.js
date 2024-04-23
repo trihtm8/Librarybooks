@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const config = require("./app/config");
 const { DocGia, Sach, NhaXuatBan, TheoDoiMuonSach, NhanVien } = require('./app/models/models');
 const faker = require('faker');
+const { max, min } = require('moment/moment');
 
 const deleteAllData = async () => {
     try {
@@ -155,13 +156,24 @@ const createFakeTheoDoiMuonSach = async () => {
         const numFakeTheoDoiMuonSach = 50;
         const maDocGiaList = await getAllMaDocGia();
         const maSachList = await getAllMaSach();
-
+        const fakeNgayMuonList = []
+        for (let i=0; i<=10; i++){
+            fakeNgayMuonList.push(faker.date.past());
+        }
+        for(let i=0; i<=3; i++){
+            fakeNgayMuonList.push(faker.date.future());
+        }
         for (let i = 0; i < numFakeTheoDoiMuonSach; i++) {
+            let fakeNgayMuon = faker.random.arrayElement(fakeNgayMuonList);
+            let futureDay = new Date(fakeNgayMuon);
+            futureDay.setDate(futureDay.getDate() + 50);
+            let fakeNgayTra = faker.date.between(fakeNgayMuon, futureDay);
             const fakeTheoDoiMuonSach = {
                 MaDocGia: faker.random.arrayElement(maDocGiaList),
                 MaSach: faker.random.arrayElement(maSachList),
-                NgayMuon: faker.date.past(),
-                NgayTra: faker.date.between(faker.date.past(), faker.date.future())
+                NgayMuon: fakeNgayMuon,
+                NgayTra: fakeNgayTra,
+                DaTra: faker.random.arrayElement([true, false])
             };
             fakeTheoDoiMuonSachData.push(fakeTheoDoiMuonSach);
         }
@@ -172,6 +184,7 @@ const createFakeTheoDoiMuonSach = async () => {
         console.error("Lỗi khi thêm dữ liệu giả mạo cho theo dõi mượn sách:", error.message);
     }
 };
+
 
 mongoose.connect(config.db.uri)
     .then(async () => {
