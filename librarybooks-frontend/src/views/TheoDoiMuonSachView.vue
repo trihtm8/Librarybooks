@@ -174,8 +174,10 @@
     methods: {
       async tra(id){
         await TheoDoiMuonSachService.update(id, {DaTra: true});
+        let tempFIlter = this.filterCriterial;
         this.unFiltered();
         await this.fetchSachList();
+        this.filterCriterial=tempFIlter;
       },
       async fetchSachList() {
         try {
@@ -213,7 +215,10 @@
       async deleteTDMS(id){
         try {
           await TheoDoiMuonSachService.delete(id);
+          let tempFIlter = this.filterCriterial;
+          this.unFiltered();
           await this.fetchSachList();
+          this.filterCriterial=tempFIlter;
         }catch (error){
           console.log("Lỗi khi xóa Theo Dõi Mượn Sách:", error);
         }

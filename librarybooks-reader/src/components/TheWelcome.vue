@@ -85,6 +85,7 @@ defineProps({
         <label for="changeDC">Địa chỉ: </label>
         <input type="text" id="changeDC" v-model="newDocGia.DiaChi">
         <br>
+        <button @click="saveChange"><i class="fa-solid fa-save"></i></button>
     </div>
   </WelcomeItem>
 </template>
@@ -202,7 +203,6 @@ defineProps({
           Phai: this.phai,
           DiaChi: this.diachi
         }
-        console.table(this.newDocGia);
       },
       async saveChange(){
         if(this.newDocGia.DienThoai != ''
@@ -212,7 +212,7 @@ defineProps({
         && (this.newDocGia.Phai != "Nam" || this.newDocGia.Phai != "Nữ" || this.newDocGia.Phai != "Khác")
         && this.newDocGia.DiaChi != ''){
           try {
-            await DocGiaService.update(this.$route.params.id, )
+            await DocGiaService.update(this.$route.params.id, this.newDocGia);
           }catch(err){
             console.log("Error when saveChange:", err);
           }

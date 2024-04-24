@@ -344,7 +344,10 @@
             await Promise.all(this.selectedItems.map(async (element) => {
               await SachService.delete(element);
             }));
+            let tempFilter=this.filterCriteria;
+            this.unFilter();
             await this.fetchSachList();
+            this.filterCriteria=tempFilter;
             this.selectedItems=[];
             } else {
                       
@@ -386,7 +389,10 @@
       async saveChange(editedItem) {
         try {
           await SachService.update(editedItem._id, editedItem);
+          let tempFilter=this.filterCriteria;
+          this.unFilter();
           await this.fetchSachList();
+          this.filterCriteria=tempFilter;
           this.editedItemId = null;
           this.editedItem = {};
         } catch (error) {

@@ -64,7 +64,8 @@ router.put('/:id', async (req, res, next) => {
             return next(new ApiError(404, 'DocGia not found'));
         }
         formattedUpdatedDocGia=updatedDocGia.toJSON();
-        formattedUpdatedDocGia['NgaySinh']=moment(savedDocGia.NgaySinh).format('DD-MM-YYYY');
+        formattedUpdatedDocGia['NgaySinh']=moment(updatedDocGia.NgaySinh).format('DD-MM-YYYY');
+        updatedDocGia.save();
         res.json(formattedUpdatedDocGia);
     } catch (err) {
         next(err);
